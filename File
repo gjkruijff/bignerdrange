@@ -1,0 +1,12 @@
+    |
+    <def> <email_contact_subj>
+
+
+
+<email_contact_subj> = <contact-email> <subj>
+                       |
+                       <email> <subj> an <contact> ; 
+
+<subj>               = <pre-subj> <subj-body> ;
+<pre-subj>           = über | zu | zum thema | mit [dem] betreff | titel ;
+
