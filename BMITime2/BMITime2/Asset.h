@@ -7,13 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+@class Employee;
 
 @interface Asset : NSObject
 {
     NSString *label;
+    Employee *holder;
     unsigned int resaleValue;
 }
 @property (strong) NSString *label;
 @property unsigned int resaleValue;
+@property (strong) Employee *holder;
 @end
     

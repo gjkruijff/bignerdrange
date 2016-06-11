@@ -8,14 +8,21 @@
 
 #import <Foundation/Foundation.h>
 #import "Asset.h"
+#import "Employee.h"
 
 @implementation Asset
 
-@synthesize label, resaleValue;
+@synthesize label, resaleValue, holder;
 
 - (NSString *) description
 {
-    return [NSString stringWithFormat:@"<%@: $%d >", [self label], [self resaleValue]];
+    // is hlder non-nil?
+    if ([self holder]) {
+        return [NSString stringWithFormat:@"<%@: $%d assigned to %@>",
+                [self label], [self resaleValue], [self holder]];
+    } else {
+        return [NSString stringWithFormat:@"<%@: $%d >", [self label], [self resaleValue]];
+    }
 }
 
 - (void) dealloc
