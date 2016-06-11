@@ -6,8 +6,14 @@
 //  Copyright © 2016 Geert-Jan Kruijff. All rights reserved.
 //
 
-#ifndef Asset_h
-#define Asset_h
+#import <Foundation/Foundation.h>
 
-
-#endif /* Asset_h */
+@interface Asset : NSObject
+{
+    NSString *label;
+    unsigned int resaleValue;
+}
+@property (strong) NSString *label;
+@property unsigned int resaleValue;
+@end
+    
