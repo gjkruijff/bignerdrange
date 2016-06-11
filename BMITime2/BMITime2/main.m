@@ -28,6 +28,8 @@ int main(int argc, const char * argv[]) {
             [employees addObject:person];
         } // end for
         
+        NSMutableArray *allAssets = [[NSMutableArray alloc]init];
+        
         // Create 10 assets
         for (int i=0; i < 10; i++) {
             // Create an asset
@@ -42,13 +44,20 @@ int main(int argc, const char * argv[]) {
             Employee *randomEmployee = [employees objectAtIndex:randomIndex];
             // Assign the asset to the random employee
             [randomEmployee addAssetsObject:asset];
+            // Add the asset to the asset array
+            [allAssets addObject:asset];
         } // end for
         
         NSLog(@"Employees: %@", employees);
         NSLog(@"Giving up ownership of one employee");
         [employees removeObjectAtIndex:5];
+        
+        NSLog(@"All assets: %@", allAssets);
+        
         NSLog(@"Giving up ownership of array");
+        allAssets = nil;
         employees = nil;
     }
+    sleep(100); 
     return 0;
 }
