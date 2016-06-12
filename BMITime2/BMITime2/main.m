@@ -17,6 +17,11 @@ int main(int argc, const char * argv[]) {
         
         // Create an array of Employee objects
         NSMutableArray *employees = [[NSMutableArray alloc] init];
+        
+        // Create a dictionary of executives
+        NSMutableDictionary *executives = [[NSMutableDictionary alloc] init];
+        
+        
         for (int i=0; i<10; i++) {
             Employee *person = [[Employee alloc] init];
         
@@ -26,6 +31,13 @@ int main(int argc, const char * argv[]) {
             [person setEmployeeID:i];
 
             [employees addObject:person];
+            
+            if (i==0) { [executives setObject:person forKey:@"CEO"]; }
+            if (i==1) { [executives setObject:person forKey:@"CFO"]; }
+            if (i==2) { [executives setObject:person forKey:@"CTO"]; }
+            if (i==3) { [executives setObject:person forKey:@"CIO"]; }
+            
+            
         } // end for
         
         NSMutableArray *allAssets = [[NSMutableArray alloc]init];
@@ -60,6 +72,9 @@ int main(int argc, const char * argv[]) {
         [employees removeObjectAtIndex:5];
         
         NSLog(@"All assets: %@", allAssets);
+        
+        NSLog(@"Executives: %@", executives);
+        executives = nil;
         
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"holder.valueOfAssets > 70"];
         NSArray *toBeReclaimed = [allAssets filteredArrayUsingPredicate:predicate];

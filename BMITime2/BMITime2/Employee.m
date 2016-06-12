@@ -17,7 +17,7 @@
 - (void)addAssetsObject:(Asset *)a
 {
     // is assets nil?
-    if (!assets) { assets = [[NSMutableArray alloc]init];}
+    if (!assets) { assets = [[NSMutableSet alloc]init];}
     [assets addObject:a];
     [a setHolder:self];
 }
