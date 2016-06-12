@@ -21,7 +21,9 @@ int main(int argc, const char * argv[]) {
         
         // Use the user's locale
         NSLocale *here = [NSLocale currentLocale];
-        NSString *currency = [here objectForKey:@"currency"];
+        // NSString *currency = [here objectForKey:@"currency"];
+        // Instead of using the string value for the key, use a constant! Finds errors at compile time
+        NSString *currency = [here objectForKey:NSLocaleCurrencyCode];
         NSLog(@"Money is %@", currency);
         
         
