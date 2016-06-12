@@ -17,6 +17,11 @@ int main(int argc, const char * argv[]) {
         
         // Create an array of Employee objects
         NSMutableArray *employees = [[NSMutableArray alloc] init];
+        
+        // Create a dictionary of executives
+        NSMutableDictionary *executives = [[NSMutableDictionary alloc] init];
+        
+        
         for (int i=0; i<10; i++) {
             Employee *person = [[Employee alloc] init];
         
@@ -26,6 +31,13 @@ int main(int argc, const char * argv[]) {
             [person setEmployeeID:i];
 
             [employees addObject:person];
+            
+            if (i==0) { [executives setObject:person forKey:@"CEO"]; }
+            if (i==1) { [executives setObject:person forKey:@"CFO"]; }
+            if (i==2) { [executives setObject:person forKey:@"CTO"]; }
+            if (i==3) { [executives setObject:person forKey:@"CIO"]; }
+            
+            
         } // end for
         
         NSMutableArray *allAssets = [[NSMutableArray alloc]init];
@@ -48,11 +60,27 @@ int main(int argc, const char * argv[]) {
             [allAssets addObject:asset];
         } // end for
         
+        // Filter the employees by asset value. If the same value, sort by employeeID
+        
+        NSSortDescriptor *voa = [NSSortDescriptor sortDescriptorWithKey:@"valueOfAssets" ascending:YES];
+        NSSortDescriptor *ei  = [NSSortDescriptor sortDescriptorWithKey:@"employeeID" ascending:YES];
+        [employees sortUsingDescriptors:[NSArray arrayWithObjects: voa, ei, nil]];
+        
+        
         NSLog(@"Employees: %@", employees);
         NSLog(@"Giving up ownership of one employee");
         [employees removeObjectAtIndex:5];
         
         NSLog(@"All assets: %@", allAssets);
+        
+        NSLog(@"Executives: %@", executives);
+        executives = nil;
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"holder.valueOfAssets > 70"];
+        NSArray *toBeReclaimed = [allAssets filteredArrayUsingPredicate:predicate];
+        NSLog(@"To be reclaimed: %@", toBeReclaimed);
+        toBeReclaimed = nil;
+        
         
         NSLog(@"Giving up ownership of array");
         allAssets = nil;
