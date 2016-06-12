@@ -48,11 +48,24 @@ int main(int argc, const char * argv[]) {
             [allAssets addObject:asset];
         } // end for
         
+        // Filter the employees by asset value. If the same value, sort by employeeID
+        
+        NSSortDescriptor *voa = [NSSortDescriptor sortDescriptorWithKey:@"valueOfAssets" ascending:YES];
+        NSSortDescriptor *ei  = [NSSortDescriptor sortDescriptorWithKey:@"employeeID" ascending:YES];
+        [employees sortUsingDescriptors:[NSArray arrayWithObjects: voa, ei, nil]];
+        
+        
         NSLog(@"Employees: %@", employees);
         NSLog(@"Giving up ownership of one employee");
         [employees removeObjectAtIndex:5];
         
         NSLog(@"All assets: %@", allAssets);
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"holder.valueOfAssets > 70"];
+        NSArray *toBeReclaimed = [allAssets filteredArrayUsingPredicate:predicate];
+        NSLog(@"To be reclaimed: %@", toBeReclaimed);
+        toBeReclaimed = nil;
+        
         
         NSLog(@"Giving up ownership of array");
         allAssets = nil;
